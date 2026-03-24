@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/KF.Data/KF.Data.csproj" />
+  </Folder>
+  <Folder Name="/tst/">
+    <Project Path="tst/KF.Data.Tests/KF.Data.Tests.csproj" />
+  </Folder>
+</Solution>

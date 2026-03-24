@@ -1,0 +1,18 @@
+# Build outputs
+**/bin/Debug/
+**/bin/Release/
+obj/
+out/
+artifacts/
+
+# IDE
+.vs/
+*.user
+*.suo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Test results
+TestResults/

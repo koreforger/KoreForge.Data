@@ -1,0 +1,23 @@
+{
+  "databases": [
+    {
+      "name": "AlertsDB",
+      "connectionString": "Server=localhost;Database=AlertsDB;Trusted_Connection=True;TrustServerCertificate=True;",
+      "provider": "Microsoft.EntityFrameworkCore.SqlServer",
+      "context": "AlertsDbContext",
+      "outputDir": "src/KF.Data/Alerts/Generated",
+      "schemas": [ "Notification" ],
+      "tables": [
+        "Notification.Channel",
+        "Notification.Priority",
+        "Notification.OutboxStatus",
+        "Notification.SendOutcome",
+        "Notification.NotificationOutbox",
+        "Notification.EmailPayload",
+        "Notification.SmsPayload"
+      ],
+      "useDatabaseNames": true,
+      "noOnConfiguring": true
+    }
+  ]
+}
