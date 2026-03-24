@@ -30,20 +30,20 @@ KoreForge.Data/
 │   ├── scaffold-db.ps1               # Config-driven scaffold runner
 │   └── AlertsDB-Notification-Schema.sql  # DDL for the Notification schema
 ├── src/KF.Data/
-│   ├── Generated/                    # Scaffold output — DO NOT EDIT
-│   │   ├── Alerts/                   # Entity models for AlertsDB
-│   │   │   ├── Channel.cs
-│   │   │   ├── Priority.cs
-│   │   │   ├── OutboxStatus.cs
-│   │   │   ├── SendOutcome.cs
-│   │   │   ├── NotificationOutbox.cs
-│   │   │   ├── EmailPayload.cs
-│   │   │   └── SmsPayload.cs
-│   │   └── AlertsDbContext.cs        # Generated context
-│   └── Alerts/                       # Manual layer — survives regeneration
-│       ├── AlertsDbContext.cs         # Empty partial for user extension
-│       ├── AlertsDbOptions.cs         # Connection options
-│       └── AlertsDbServiceCollectionExtensions.cs  # DI registration
+│   ├── AlertsDbContext.cs             # Partial context extension  (ns: KF.Data)
+│   ├── AlertsDbOptions.cs             # Connection options          (ns: KF.Data)
+│   ├── AlertsDbServiceCollectionExtensions.cs  # DI registration   (ns: KF.Data)
+│   └── Generated/                     # Scaffold output — DO NOT EDIT
+│       └── Alerts/                    # AlertsDB database
+│           ├── AlertsDbContext.cs      # Generated context          (ns: KF.Data)
+│           └── Notification/          # Notification schema entities
+│               ├── Channel.cs         # (ns: KF.Data.Alerts.Notification)
+│               ├── Priority.cs
+│               ├── OutboxStatus.cs
+│               ├── SendOutcome.cs
+│               ├── NotificationOutbox.cs
+│               ├── EmailPayload.cs
+│               └── SmsPayload.cs
 ├── tst/KF.Data.Tests/
 ├── bin/                              # Build & release scripts
 ├── doc/                              # Documentation
@@ -61,7 +61,7 @@ dotnet add package KoreForge.Data
 ### 2. Register in `Program.cs`
 
 ```csharp
-using KF.Data.Alerts;
+using KF.Data;
 
 builder.Services.AddAlertsDb(opts =>
     opts.ConnectionString = builder.Configuration.GetConnectionString("AlertsDB")!);
@@ -70,13 +70,13 @@ builder.Services.AddAlertsDb(opts =>
 Or with a raw connection string:
 
 ```csharp
-builder.Services.AddAlertsDb("Server=.;Database=AlertsDB;...");
+builder.Services.AddAlertsDb("Server=.;Database=AlertsDB;...";
 ```
 
 ### 3. Inject and Use
 
 ```csharp
-using KF.Data.Generated.Alerts;
+using KF.Data.Alerts.Notification;
 
 public class NotificationService(AlertsDbContext db)
 {
@@ -138,16 +138,16 @@ To scaffold a single database:
 1. Run the SQL DDL against the target server
 2. Add a new entry to `config/scaffold-config.json`
 3. Run `.\scripts\scaffold-db.ps1 -Database NewDbName`
-4. Add an options class and DI registration in a new subfolder under `src/KF.Data/` (e.g. `src/KF.Data/Staff/`)
-5. Create an empty partial context file outside `Generated/` for user extensions
+4. Add options class, DI registration, and empty partial context at `src/KF.Data/` project root
+5. Set `namespace` and `contextNamespace` in the config to keep "Generated" out of namespaces
 
 ### Extending Generated Code
 
-Generated files live in `Generated/` and must never be edited by hand. To add custom behaviour, create partial classes in the `Alerts/` folder (or any folder outside `Generated/`):
+Generated files live in `Generated/` and must never be edited by hand. To add custom behaviour, create partial classes at the project root (or any folder outside `Generated/`):
 
 ```csharp
-// src/KF.Data/Alerts/NotificationOutboxExtensions.cs
-namespace KF.Data.Generated.Alerts;
+// src/KF.Data/NotificationOutboxExtensions.cs
+namespace KF.Data.Alerts.Notification;
 
 public partial class NotificationOutbox
 {
@@ -156,7 +156,17 @@ public partial class NotificationOutbox
 }
 ```
 
-An empty partial `AlertsDbContext` is provided at `src/KF.Data/Alerts/AlertsDbContext.cs` for context-level extensions.
+An empty partial `AlertsDbContext` is provided at `src/KF.Data/AlertsDbContext.cs` for context-level extensions.
+
+### Namespace Convention
+
+| Item | Namespace | Example |
+|------|----------|--------|
+| DbContext, Options, DI | `{RootNs}` | `KF.Data` |
+| Entity models | `{RootNs}.{DbName}.{Schema}` | `KF.Data.Alerts.Notification` |
+| Entity models (dbo schema) | `{RootNs}.{DbName}` | `KF.Data.Alerts` |
+
+"Generated" never appears in a namespace — it is purely a folder for scaffold output.
 
 ## Scripts
 

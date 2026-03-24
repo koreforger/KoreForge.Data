@@ -19,13 +19,15 @@ dotnet tool restore
 
 ```
 src/KF.Data/
-  Generated/             ← Scaffold output (disposable)
-    Alerts/              ← Entity models for AlertsDB
-    AlertsDbContext.cs   ← Generated context
-  Alerts/                ← Manual layer (survives regeneration)
-    AlertsDbContext.cs   ← Empty partial for user extension
-    AlertsDbOptions.cs   ← Connection string holder
-    AlertsDbServiceCollectionExtensions.cs ← DI registration
+  AlertsDbContext.cs   ← Empty partial for user extension (ns: KF.Data)
+  AlertsDbOptions.cs   ← Connection string holder         (ns: KF.Data)
+  AlertsDbServiceCollectionExtensions.cs ← DI registration (ns: KF.Data)
+  Generated/           ← Scaffold output (disposable)
+    Alerts/            ← AlertsDB database
+      AlertsDbContext.cs ← Generated context              (ns: KF.Data)
+      Notification/    ← Notification schema entities
+        Channel.cs     ← (ns: KF.Data.Alerts.Notification)
+        ...
 
 tst/KF.Data.Tests/     ← Unit tests (SQLite in-memory)
 
@@ -58,8 +60,10 @@ scripts/
   "connectionString": "Server=...;Database=NewDB;...",
   "provider": "Microsoft.EntityFrameworkCore.SqlServer",
   "context": "NewDbContext",
-  "outputDir": "src/KF.Data/Generated/NewDb",
-  "contextDir": "src/KF.Data/Generated",
+  "outputDir": "src/KF.Data/Generated/NewDb/Dbo",
+  "contextDir": "src/KF.Data/Generated/NewDb",
+  "namespace": "KF.Data.NewDb",
+  "contextNamespace": "KF.Data",
   "schemas": ["dbo"],
   "tables": ["dbo.Table1", "dbo.Table2"],
   "useDatabaseNames": true,
@@ -68,8 +72,8 @@ scripts/
 ```
 
 3. Run `.\scripts\scaffold-db.ps1 -Database NewDB`
-4. Create `src/KF.Data/NewDb/NewDbOptions.cs` and `NewDbServiceCollectionExtensions.cs`
-5. Create an empty partial `NewDbContext.cs` in `src/KF.Data/NewDb/` for user extensions
+4. Create `src/KF.Data/NewDbOptions.cs` and `NewDbServiceCollectionExtensions.cs` at the project root
+5. Create an empty partial `NewDbContext.cs` at the project root for user extensions
 6. Add tests and commit
 
 ### scaffold-config.json Format
@@ -82,6 +86,8 @@ scripts/
 | `context` | Name for the generated DbContext class |
 | `outputDir` | Relative path for entity model scaffold output |
 | `contextDir` | Relative path for context class output (optional, defaults to outputDir) |
+| `namespace` | Explicit namespace for entity models (keeps "Generated" out of namespaces) |
+| `contextNamespace` | Explicit namespace for the DbContext class |
 | `schemas` | Array of schemas to include |
 | `tables` | Array of fully-qualified table names |
 | `useDatabaseNames` | Preserve database column/table names |
@@ -99,7 +105,8 @@ scripts/
 ## Rules
 
 1. **Never edit files in `Generated/` folders** — they will be overwritten on next scaffold
-2. **Extend via partial classes** outside `Generated/` (e.g. `Alerts/AlertsDbContext.cs`)
+2. **Extend via partial classes** at the project root, outside `Generated/` (e.g. `AlertsDbContext.cs`)
 3. **Lookup data lives in database tables** — no C# enums for reference data
 4. **The scaffold script is the entry point** — not raw `dotnet ef` commands
 5. **Tests use SQLite in-memory** — no SQL Server dependency for unit tests
+6. **"Generated" never appears in a namespace** — use `namespace` and `contextNamespace` in scaffold config

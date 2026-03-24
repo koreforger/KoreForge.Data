@@ -3,7 +3,7 @@
 //     Changes will be overwritten when the scaffold is re-run.
 // </auto-generated>
 #nullable enable
-namespace KF.Data.Generated.Alerts;
+namespace KF.Data.Alerts.Notification;
 
 public partial class EmailPayload
 {

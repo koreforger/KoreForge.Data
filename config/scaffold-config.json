@@ -5,8 +5,10 @@
       "connectionString": "Server=localhost;Database=AlertsDB;Trusted_Connection=True;TrustServerCertificate=True;",
       "provider": "Microsoft.EntityFrameworkCore.SqlServer",
       "context": "AlertsDbContext",
-      "outputDir": "src/KF.Data/Generated/Alerts",
-      "contextDir": "src/KF.Data/Generated",
+      "outputDir": "src/KF.Data/Generated/Alerts/Notification",
+      "contextDir": "src/KF.Data/Generated/Alerts",
+      "namespace": "KF.Data.Alerts.Notification",
+      "contextNamespace": "KF.Data",
       "schemas": [ "Notification" ],
       "tables": [
         "Notification.Channel",

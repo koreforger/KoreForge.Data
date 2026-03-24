@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "KoreForge",
+  "classifications": [ "Library", "EFCore", "Database-First" ],
+  "identity": "KoreForge.Data.Template",
+  "name": "KoreForge Data Library",
+  "shortName": "kfdata",
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "description": "Database-first EF Core data library with scaffold scripts, partial-class extension, and DI registration. The -n name must be two-part (e.g. My.App).",
+  "sourceName": "KF.Data",
+  "preferNameDirectory": true,
+  "symbols": {
+    "DatabaseShort": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Short database name used in folders, namespaces, and class prefixes (e.g. Alerts, Staff). Class names are derived by appending Db/DB (AlertsDb, AlertsDB).",
+      "defaultValue": "Alerts",
+      "replaces": "Alerts",
+      "fileRename": "Alerts"
+    },
+    "SchemaName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "SQL schema name for entity namespace/folder. For dbo schemas, set this to the DatabaseShort value to collapse the extra segment.",
+      "defaultValue": "Notification",
+      "replaces": "Notification",
+      "fileRename": "Notification"
+    },
+    "SolutionName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Display/package name for the solution (e.g. KoreForge.Data, MyCompany.Data).",
+      "defaultValue": "KoreForge.Data",
+      "replaces": "KoreForge.Data",
+      "fileRename": "KoreForge.Data"
+    }
+  },
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            ".git/**",
+            ".template.config/**",
+            "artifacts/**",
+            "out/**",
+            "**/bin/**",
+            "**/obj/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "postActions": [
+    {
+      "description": "Restore dotnet tools",
+      "manualInstructions": [
+        { "text": "Run 'dotnet tool restore' to install dotnet-ef." }
+      ],
+      "actionId": "210D431B-A78B-4D2F-B762-4ED3E3EA9025",
+      "continueOnError": true,
+      "args": {
+        "executable": "dotnet",
+        "args": "tool restore"
+      }
+    }
+  ]
+}

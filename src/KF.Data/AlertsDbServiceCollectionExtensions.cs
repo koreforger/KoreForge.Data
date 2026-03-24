@@ -1,8 +1,7 @@
-using KF.Data.Generated;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KF.Data.Alerts;
+namespace KF.Data;
 
 /// <summary>
 /// Extension methods for registering the AlertsDB context.

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace KF.Data.Generated;
+namespace KF.Data;
 
 /// <summary>
 /// Partial class for extending <see cref="AlertsDbContext"/> with custom behaviour.

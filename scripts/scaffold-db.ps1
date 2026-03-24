@@ -71,6 +71,16 @@ try {
             $args += $db.contextDir
         }
 
+        # Explicit namespaces (keeps "Generated" out of namespace)
+        if ($db.namespace) {
+            $args += '--namespace'
+            $args += $db.namespace
+        }
+        if ($db.contextNamespace) {
+            $args += '--context-namespace'
+            $args += $db.contextNamespace
+        }
+
         # Add schema filters
         foreach ($schema in $db.schemas) {
             $args += '--schema'

@@ -4,10 +4,10 @@
 //     To extend, use partial classes outside the Generated folder.
 // </auto-generated>
 #nullable enable
-using KF.Data.Generated.Alerts;
+using KF.Data.Alerts.Notification;
 using Microsoft.EntityFrameworkCore;
 
-namespace KF.Data.Generated;
+namespace KF.Data;
 
 public partial class AlertsDbContext : DbContext
 {

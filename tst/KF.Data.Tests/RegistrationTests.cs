@@ -1,5 +1,4 @@
-using KF.Data.Alerts;
-using KF.Data.Generated;
+using KF.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,4 +1,4 @@
-namespace KF.Data.Alerts;
+namespace KF.Data;
 
 /// <summary>
 /// Connection options for the AlertsDB database.
