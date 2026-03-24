@@ -1,4 +1,5 @@
-using KF.Data.Alerts.Generated;
+using KF.Data.Generated;
+using KF.Data.Generated.Alerts;
 using Microsoft.EntityFrameworkCore;
 
 namespace KF.Data.Tests;

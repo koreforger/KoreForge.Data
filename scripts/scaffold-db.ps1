@@ -40,10 +40,18 @@ try {
 
         Write-Host "Scaffolding $($db.name)..." -ForegroundColor Cyan
 
-        # Clean existing generated output
+        # Clean existing generated output (entity models)
         if (Test-Path $db.outputDir) {
             Write-Host "  Cleaning $($db.outputDir)..."
             Remove-Item "$($db.outputDir)\*" -Recurse -Force -ErrorAction SilentlyContinue
+        }
+        # Clean generated context file if contextDir is specified
+        if ($db.contextDir -and (Test-Path $db.contextDir)) {
+            $contextFile = Join-Path $db.contextDir "$($db.context).cs"
+            if (Test-Path $contextFile) {
+                Write-Host "  Cleaning $contextFile..."
+                Remove-Item $contextFile -Force -ErrorAction SilentlyContinue
+            }
         }
 
         # Build the scaffold command arguments
@@ -56,6 +64,12 @@ try {
             '--output-dir', $db.outputDir,
             '--force'
         )
+
+        # Separate context output directory
+        if ($db.contextDir) {
+            $args += '--context-dir'
+            $args += $db.contextDir
+        }
 
         # Add schema filters
         foreach ($schema in $db.schemas) {

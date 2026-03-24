@@ -3,21 +3,17 @@
 //     Changes will be overwritten when the scaffold is re-run.
 // </auto-generated>
 #nullable enable
-namespace KF.Data.Alerts.Generated;
+namespace KF.Data.Generated.Alerts;
 
-public partial class EmailPayload
+public partial class SmsPayload
 {
-    public long EmailPayloadId { get; set; }
+    public long SmsPayloadId { get; set; }
 
     public long NotificationOutboxId { get; set; }
 
-    public string FromAddress { get; set; } = null!;
+    public string? FromNumber { get; set; }
 
-    public string? CcRecipients { get; set; }
-
-    public string? BccRecipients { get; set; }
-
-    public bool IsHtml { get; set; }
+    public string? ProviderMessageId { get; set; }
 
     public virtual NotificationOutbox NotificationOutbox { get; set; } = null!;
 }

@@ -19,10 +19,13 @@ dotnet tool restore
 
 ```
 src/KF.Data/
-  Alerts/
-    Generated/         ← Scaffold output (disposable)
-    AlertsDbOptions.cs ← Manual: connection string holder
-    AlertsDbServiceCollectionExtensions.cs ← Manual: DI registration
+  Generated/             ← Scaffold output (disposable)
+    Alerts/              ← Entity models for AlertsDB
+    AlertsDbContext.cs   ← Generated context
+  Alerts/                ← Manual layer (survives regeneration)
+    AlertsDbContext.cs   ← Empty partial for user extension
+    AlertsDbOptions.cs   ← Connection string holder
+    AlertsDbServiceCollectionExtensions.cs ← DI registration
 
 tst/KF.Data.Tests/     ← Unit tests (SQLite in-memory)
 
@@ -55,7 +58,8 @@ scripts/
   "connectionString": "Server=...;Database=NewDB;...",
   "provider": "Microsoft.EntityFrameworkCore.SqlServer",
   "context": "NewDbContext",
-  "outputDir": "src/KF.Data/NewDb/Generated",
+  "outputDir": "src/KF.Data/Generated/NewDb",
+  "contextDir": "src/KF.Data/Generated",
   "schemas": ["dbo"],
   "tables": ["dbo.Table1", "dbo.Table2"],
   "useDatabaseNames": true,
@@ -65,7 +69,8 @@ scripts/
 
 3. Run `.\scripts\scaffold-db.ps1 -Database NewDB`
 4. Create `src/KF.Data/NewDb/NewDbOptions.cs` and `NewDbServiceCollectionExtensions.cs`
-5. Add tests and commit
+5. Create an empty partial `NewDbContext.cs` in `src/KF.Data/NewDb/` for user extensions
+6. Add tests and commit
 
 ### scaffold-config.json Format
 
@@ -75,7 +80,8 @@ scripts/
 | `connectionString` | SQL Server connection string |
 | `provider` | EF Core provider (e.g. `Microsoft.EntityFrameworkCore.SqlServer`) |
 | `context` | Name for the generated DbContext class |
-| `outputDir` | Relative path for scaffold output |
+| `outputDir` | Relative path for entity model scaffold output |
+| `contextDir` | Relative path for context class output (optional, defaults to outputDir) |
 | `schemas` | Array of schemas to include |
 | `tables` | Array of fully-qualified table names |
 | `useDatabaseNames` | Preserve database column/table names |
@@ -93,7 +99,7 @@ scripts/
 ## Rules
 
 1. **Never edit files in `Generated/` folders** — they will be overwritten on next scaffold
-2. **Extend via partial classes** in the parent folder (e.g. `Alerts/`)
+2. **Extend via partial classes** outside `Generated/` (e.g. `Alerts/AlertsDbContext.cs`)
 3. **Lookup data lives in database tables** — no C# enums for reference data
 4. **The scaffold script is the entry point** — not raw `dotnet ef` commands
 5. **Tests use SQLite in-memory** — no SQL Server dependency for unit tests

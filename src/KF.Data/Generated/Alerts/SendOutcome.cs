@@ -3,11 +3,11 @@
 //     Changes will be overwritten when the scaffold is re-run.
 // </auto-generated>
 #nullable enable
-namespace KF.Data.Alerts.Generated;
+namespace KF.Data.Generated.Alerts;
 
-public partial class OutboxStatus
+public partial class SendOutcome
 {
-    public int OutboxStatusId { get; set; }
+    public int SendOutcomeId { get; set; }
 
     public string Name { get; set; } = null!;
 

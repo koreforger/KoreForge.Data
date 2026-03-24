@@ -21,10 +21,11 @@ This registers `AlertsDbContext` as a scoped service with SQL Server configured.
 
 ## Querying Entities
 
-All entities are in the `KF.Data.Alerts.Generated` namespace:
+All entities are in the `KF.Data.Generated.Alerts` namespace, and contexts are in `KF.Data.Generated`:
 
 ```csharp
-using KF.Data.Alerts.Generated;
+using KF.Data.Generated;
+using KF.Data.Generated.Alerts;
 
 // Get all channels
 var channels = await db.Channel.ToListAsync(ct);
@@ -94,7 +95,7 @@ To add computed properties or methods, create partial classes **outside** the `G
 
 ```csharp
 // src/KF.Data/Alerts/NotificationOutboxExtensions.cs
-namespace KF.Data.Alerts.Generated;
+namespace KF.Data.Generated.Alerts;
 
 public partial class NotificationOutbox
 {
@@ -103,4 +104,20 @@ public partial class NotificationOutbox
 }
 ```
 
-These survive scaffold regeneration because they are in separate files.
+To extend the context, use the provided partial at `src/KF.Data/Alerts/AlertsDbContext.cs`:
+
+```csharp
+using Microsoft.EntityFrameworkCore;
+
+namespace KF.Data.Generated;
+
+public partial class AlertsDbContext
+{
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
+    {
+        // Additional model configuration
+    }
+}
+```
+
+These survive scaffold regeneration because they are in separate files outside `Generated/`.
