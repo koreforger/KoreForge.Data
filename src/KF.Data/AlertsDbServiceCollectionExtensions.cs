@@ -36,4 +36,34 @@ public static class AlertsDbServiceCollectionExtensions
 
         return services;
     }
+
+    /// <summary>
+    /// Registers an <see cref="IDbContextFactory{AlertsDbContext}"/> (singleton) for creating
+    /// contexts outside of a request scope — background workers, hosted services, parallel work.
+    /// </summary>
+    public static IServiceCollection AddAlertsDbFactory(
+        this IServiceCollection services,
+        Action<AlertsDbOptions> configure)
+    {
+        var options = new AlertsDbOptions();
+        configure(options);
+
+        services.AddDbContextFactory<AlertsDbContext>(db =>
+            db.UseSqlServer(options.ConnectionString));
+
+        return services;
+    }
+
+    /// <summary>
+    /// Registers an <see cref="IDbContextFactory{AlertsDbContext}"/> (singleton) with a raw connection string.
+    /// </summary>
+    public static IServiceCollection AddAlertsDbFactory(
+        this IServiceCollection services,
+        string connectionString)
+    {
+        services.AddDbContextFactory<AlertsDbContext>(db =>
+            db.UseSqlServer(connectionString));
+
+        return services;
+    }
 }
