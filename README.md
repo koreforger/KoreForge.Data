@@ -45,7 +45,7 @@ KoreForge.Data/
 │               ├── EmailPayload.cs
 │               └── SmsPayload.cs
 ├── tst/KF.Data.Tests/
-├── bin/                              # Build & release scripts
+├── scr/                              # Build & release scripts
 ├── doc/                              # Documentation
 └── artifacts/                        # NuGet package output
 ```
@@ -173,12 +173,12 @@ An empty partial `AlertsDbContext` is provided at `src/KF.Data/AlertsDbContext.c
 | Script | Purpose |
 |--------|---------|
 | `scripts/scaffold-db.ps1` | Config-driven scaffold runner |
-| `bin/build-clean.ps1` | Clean build outputs |
-| `bin/build-rebuild.ps1` | Force rebuild |
-| `bin/build-test.ps1` | Build + run tests |
-| `bin/build-test-codecoverage.ps1` | Build + test + coverage report |
-| `bin/git-push.ps1` | Add, commit, push |
-| `bin/git-push-nuget.ps1` | Tag and push for NuGet release |
+| `scr/build-clean.ps1` | Clean build outputs |
+| `scr/build-rebuild.ps1` | Force rebuild |
+| `scr/build-test.ps1` | Build + run tests |
+| `scr/build-test-codecoverage.ps1` | Build + test + coverage report |
+| `scr/git-push.ps1` | Add, commit, push |
+| `scr/git-push-nuget.ps1` | Tag and push for NuGet release |
 
 ## License
 

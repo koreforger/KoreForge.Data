@@ -12,7 +12,7 @@
 dotnet tool restore
 
 # Build and run tests
-.\bin\build-test.ps1
+.\scr\build-test.ps1
 ```
 
 ## Project Layout
@@ -97,10 +97,10 @@ scripts/
 
 | Script | What it does |
 |--------|-------------|
-| `bin/build-clean.ps1` | Clean solution + remove `out/` and `artifacts/` |
-| `bin/build-rebuild.ps1` | Force rebuild in Release |
-| `bin/build-test.ps1` | Build + run all tests |
-| `bin/build-test-codecoverage.ps1` | Build + test + HTML coverage report |
+| `scr/build-clean.ps1` | Clean solution + remove `out/` and `artifacts/` |
+| `scr/build-rebuild.ps1` | Force rebuild in Release |
+| `scr/build-test.ps1` | Build + run all tests |
+| `scr/build-test-codecoverage.ps1` | Build + test + HTML coverage report |
 
 ## Rules
 
