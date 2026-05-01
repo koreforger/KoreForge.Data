@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\KF.Data\KF.Data.csproj" />
+    <PackageReference Include="KoreForge.Data" VersionOverride="1.0.1-alpha" />
   </ItemGroup>
 
 </Project>
