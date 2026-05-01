@@ -26,7 +26,7 @@ KoreForge.Data provides scaffolded EF Core `DbContext` and entity classes genera
 KoreForge.Data/
 ├── config/
 │   └── scaffold-config.json          # Drives scaffolding — one entry per database
-├── scripts/
+├── scr/
 │   ├── scaffold-db.ps1               # Config-driven scaffold runner
 │   └── AlertsDB-Notification-Schema.sql  # DDL for the Notification schema
 ├── src/KF.Data/
@@ -122,7 +122,7 @@ All lookup values are database rows — no C# enums. FK relationships provide na
 ### Running the Scaffold
 
 ```shell
-.\scripts\scaffold-db.ps1
+.\scr\scaffold-db.ps1
 ```
 
 This reads `config/scaffold-config.json`, cleans existing generated output, and runs `dotnet ef dbcontext scaffold` for each configured database.
@@ -130,14 +130,14 @@ This reads `config/scaffold-config.json`, cleans existing generated output, and 
 To scaffold a single database:
 
 ```shell
-.\scripts\scaffold-db.ps1 -Database AlertsDB
+.\scr\scaffold-db.ps1 -Database AlertsDB
 ```
 
 ### Adding a New Database
 
 1. Run the SQL DDL against the target server
 2. Add a new entry to `config/scaffold-config.json`
-3. Run `.\scripts\scaffold-db.ps1 -Database NewDbName`
+3. Run `.\scr\scaffold-db.ps1 -Database NewDbName`
 4. Add options class, DI registration, and empty partial context at `src/KF.Data/` project root
 5. Set `namespace` and `contextNamespace` in the config to keep "Generated" out of namespaces
 
@@ -172,7 +172,7 @@ An empty partial `AlertsDbContext` is provided at `src/KF.Data/AlertsDbContext.c
 
 | Script | Purpose |
 |--------|---------|
-| `scripts/scaffold-db.ps1` | Config-driven scaffold runner |
+| `scr/scaffold-db.ps1` | Config-driven scaffold runner |
 | `scr/build-clean.ps1` | Clean build outputs |
 | `scr/build-rebuild.ps1` | Force rebuild |
 | `scr/build-test.ps1` | Build + run tests |
@@ -183,3 +183,5 @@ An empty partial `AlertsDbContext` is provided at `src/KF.Data/AlertsDbContext.c
 ## License
 
 [MIT](LICENSE.md)
+
+
