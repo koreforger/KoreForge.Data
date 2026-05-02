@@ -1,8 +1,8 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/KF.Data/KF.Data.csproj" />
+    <Project Path="src/KoreForge.Data/KoreForge.Data.csproj" />
   </Folder>
   <Folder Name="/tst/">
-    <Project Path="tst/KF.Data.Tests/KF.Data.Tests.csproj" />
+    <Project Path="tst/KoreForge.Data.Tests/KoreForge.Data.Tests.csproj" />
   </Folder>
 </Solution>

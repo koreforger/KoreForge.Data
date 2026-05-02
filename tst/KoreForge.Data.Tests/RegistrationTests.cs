@@ -1,8 +1,8 @@
-using KF.Data;
+using KoreForge.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KF.Data.Tests;
+namespace KoreForge.Data.Tests;
 
 public class RegistrationTests
 {

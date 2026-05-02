@@ -1,4 +1,4 @@
-namespace KF.Data;
+namespace KoreForge.Data;
 
 /// <summary>
 /// Connection options for the AlertsDB database.

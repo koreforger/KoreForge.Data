@@ -11,7 +11,7 @@ dotnet add package KoreForge.Data
 KoreForge.Data provides a DI extension method for each scaffolded database. For AlertsDB:
 
 ```csharp
-using KF.Data;
+using KoreForge.Data;
 
 builder.Services.AddAlertsDb(opts =>
     opts.ConnectionString = builder.Configuration.GetConnectionString("AlertsDB")!);
@@ -21,11 +21,11 @@ This registers `AlertsDbContext` as a scoped service with SQL Server configured.
 
 ## Querying Entities
 
-All entities are in the `KF.Data.Alerts.Notification` namespace, and contexts/options/DI are in `KF.Data`:
+All entities are in the `KoreForge.Data.Alerts.Notification` namespace, and contexts/options/DI are in `KoreForge.Data`:
 
 ```csharp
-using KF.Data;
-using KF.Data.Alerts.Notification;
+using KoreForge.Data;
+using KoreForge.Data.Alerts.Notification;
 
 // Get all channels
 var channels = await db.Channel.ToListAsync(ct);
@@ -94,8 +94,8 @@ var smsNotifications = await db.NotificationOutbox
 To add computed properties or methods, create partial classes **outside** the `Generated/` folder:
 
 ```csharp
-// src/KF.Data/NotificationOutboxExtensions.cs
-namespace KF.Data.Alerts.Notification;
+// src/KoreForge.Data/NotificationOutboxExtensions.cs
+namespace KoreForge.Data.Alerts.Notification;
 
 public partial class NotificationOutbox
 {
@@ -104,12 +104,12 @@ public partial class NotificationOutbox
 }
 ```
 
-To extend the context, use the provided partial at `src/KF.Data/AlertsDbContext.cs`:
+To extend the context, use the provided partial at `src/KoreForge.Data/AlertsDbContext.cs`:
 
 ```csharp
 using Microsoft.EntityFrameworkCore;
 
-namespace KF.Data;
+namespace KoreForge.Data;
 
 public partial class AlertsDbContext
 {

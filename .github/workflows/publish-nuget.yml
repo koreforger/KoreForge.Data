@@ -32,7 +32,7 @@ jobs:
         run: dotnet test KoreForge.Data.slnx -c Release --no-build
 
       - name: Pack
-        run: dotnet pack src/KF.Data/KF.Data.csproj -c Release --no-build -o artifacts/
+        run: dotnet pack src/KoreForge.Data/KoreForge.Data.csproj -c Release --no-build -o artifacts/
 
       - name: Push to NuGet.org
         run: |

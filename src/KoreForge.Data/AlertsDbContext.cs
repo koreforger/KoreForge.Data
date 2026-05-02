@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace KF.Data;
+namespace KoreForge.Data;
 
 /// <summary>
 /// Partial class for extending <see cref="AlertsDbContext"/> with custom behaviour.

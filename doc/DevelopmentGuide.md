@@ -18,18 +18,18 @@ dotnet tool restore
 ## Project Layout
 
 ```
-src/KF.Data/
-  AlertsDbContext.cs   ← Empty partial for user extension (ns: KF.Data)
-  AlertsDbOptions.cs   ← Connection string holder         (ns: KF.Data)
-  AlertsDbServiceCollectionExtensions.cs ← DI registration (ns: KF.Data)
+src/KoreForge.Data/
+  AlertsDbContext.cs   ← Empty partial for user extension (ns: KoreForge.Data)
+  AlertsDbOptions.cs   ← Connection string holder         (ns: KoreForge.Data)
+  AlertsDbServiceCollectionExtensions.cs ← DI registration (ns: KoreForge.Data)
   Generated/           ← Scaffold output (disposable)
     Alerts/            ← AlertsDB database
-      AlertsDbContext.cs ← Generated context              (ns: KF.Data)
+      AlertsDbContext.cs ← Generated context              (ns: KoreForge.Data)
       Notification/    ← Notification schema entities
-        Channel.cs     ← (ns: KF.Data.Alerts.Notification)
+        Channel.cs     ← (ns: KoreForge.Data.Alerts.Notification)
         ...
 
-tst/KF.Data.Tests/     ← Unit tests (SQLite in-memory)
+tst/KoreForge.Data.Tests/     ← Unit tests (SQLite in-memory)
 
 config/
   scaffold-config.json ← Drives scaffolding for all databases
@@ -60,10 +60,10 @@ scr/
   "connectionString": "Server=...;Database=NewDB;...",
   "provider": "Microsoft.EntityFrameworkCore.SqlServer",
   "context": "NewDbContext",
-  "outputDir": "src/KF.Data/Generated/NewDb/Dbo",
-  "contextDir": "src/KF.Data/Generated/NewDb",
-  "namespace": "KF.Data.NewDb",
-  "contextNamespace": "KF.Data",
+  "outputDir": "src/KoreForge.Data/Generated/NewDb/Dbo",
+  "contextDir": "src/KoreForge.Data/Generated/NewDb",
+  "namespace": "KoreForge.Data.NewDb",
+  "contextNamespace": "KoreForge.Data",
   "schemas": ["dbo"],
   "tables": ["dbo.Table1", "dbo.Table2"],
   "useDatabaseNames": true,
@@ -72,7 +72,7 @@ scr/
 ```
 
 3. Run `.\scr\scaffold-db.ps1 -Database NewDB`
-4. Create `src/KF.Data/NewDbOptions.cs` and `NewDbServiceCollectionExtensions.cs` at the project root
+4. Create `src/KoreForge.Data/NewDbOptions.cs` and `NewDbServiceCollectionExtensions.cs` at the project root
 5. Create an empty partial `NewDbContext.cs` at the project root for user extensions
 6. Add tests and commit
 

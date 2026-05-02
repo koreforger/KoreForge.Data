@@ -3,11 +3,11 @@
 //     Changes will be overwritten when the scaffold is re-run.
 // </auto-generated>
 #nullable enable
-namespace KF.Data.Alerts.Notification;
+namespace KoreForge.Data.Alerts.Notification;
 
-public partial class Channel
+public partial class Priority
 {
-    public int ChannelId { get; set; }
+    public int PriorityId { get; set; }
 
     public string Name { get; set; } = null!;
 

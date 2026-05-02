@@ -10,7 +10,7 @@
     "type": "solution"
   },
   "description": "Database-first EF Core data library with scaffold scripts, partial-class extension, and DI registration. The -n name must be two-part (e.g. My.App).",
-  "sourceName": "KF.Data",
+  "sourceName": "KoreForge.Data",
   "preferNameDirectory": true,
   "symbols": {
     "DatabaseShort": {

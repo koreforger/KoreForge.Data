@@ -1,8 +1,8 @@
-using KF.Data;
-using KF.Data.Alerts.Notification;
+using KoreForge.Data;
+using KoreForge.Data.Alerts.Notification;
 using Microsoft.EntityFrameworkCore;
 
-namespace KF.Data.Tests;
+namespace KoreForge.Data.Tests;
 
 public class AlertsDbContextTests : IDisposable
 {

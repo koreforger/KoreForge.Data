@@ -59,7 +59,7 @@ try {
             'ef', 'dbcontext', 'scaffold',
             $db.connectionString,
             $db.provider,
-            '--project', 'src/KF.Data/KF.Data.csproj',
+            '--project', 'src/KoreForge.Data/KoreForge.Data.csproj',
             '--context', $db.context,
             '--output-dir', $db.outputDir,
             '--force'

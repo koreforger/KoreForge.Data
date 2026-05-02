@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace KF.Data;
+namespace KoreForge.Data;
 
 /// <summary>
 /// Extension methods for registering the AlertsDB context.
